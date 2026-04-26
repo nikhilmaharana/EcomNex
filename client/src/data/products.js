@@ -1,0 +1,415 @@
+const phoneGallery = [
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Iphone-14-storage-select-202209-6-1inch-blue.jpg?width=1600",
+    alt: "Blue iPhone 14 product display",
+    label: "Blue front",
+    credit: "Franceschini Dario II, CC BY-SA 4.0",
+    source: "https://commons.wikimedia.org/wiki/File:Iphone-14-storage-select-202209-6-1inch-blue.jpg",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Back_view_of_iPhone_14_Blue.jpg?width=1200",
+    alt: "Back view of a blue iPhone 14",
+    label: "Blue back",
+    credit: "Made Riyose, CC BY-SA 4.0",
+    source: "https://commons.wikimedia.org/wiki/File:Back_view_of_iPhone_14_Blue.jpg",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/A_blue_iPhone_14_Plus.jpg?width=1200",
+    alt: "Blue iPhone 14 Plus back side",
+    label: "Plus angle",
+    credit: "Kskhh, CC BY-SA 4.0",
+    source: "https://commons.wikimedia.org/wiki/File:A_blue_iPhone_14_Plus.jpg",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/IPhone_14_Product_Red.jpg?width=1200",
+    alt: "Product Red iPhone 14 back side",
+    label: "Red finish",
+    credit: "Hajoon0102, CC BY-SA 4.0",
+    source: "https://commons.wikimedia.org/wiki/File:IPhone_14_Product_Red.jpg",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/IPhone_14_Plus_and_iPhone_14.jpg?width=1400",
+    alt: "iPhone 14 Plus and iPhone 14 side by side",
+    label: "Size compare",
+    credit: "KKPCW, CC BY-SA 4.0",
+    source: "https://commons.wikimedia.org/wiki/File:IPhone_14_Plus_and_iPhone_14.jpg",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/IPhone_14_vector.svg?width=900",
+    alt: "Blue iPhone 14 front vector illustration",
+    label: "Front view",
+    credit: "Rafael Fernandez, CC BY-SA 4.0",
+    source: "https://commons.wikimedia.org/wiki/File:IPhone_14_vector.svg",
+  },
+];
+
+const galaxyGallery = [
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Samsung_Galaxy_S24.jpg?width=1200",
+    alt: "Samsung Galaxy S24",
+    label: "S24 view",
+    credit: "Vis M, CC BY-SA 4.0",
+    source: "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S24.jpg",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Samsung_Galaxy_S24%2B_01.jpg?width=1200",
+    alt: "Samsung Galaxy S24 Plus",
+    label: "S24 Plus",
+    credit: "Ganesh Mohan T, CC BY-SA 4.0",
+    source: "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S24%2B_01.jpg",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Samsung_Galaxy_s24_series.jpg?width=1400",
+    alt: "Samsung Galaxy S24 series",
+    label: "Series",
+    credit: "Wikimedia Commons contributor, CC BY-SA",
+    source: "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_s24_series.jpg",
+  },
+  { src: "", alt: "Galaxy S24 package placeholder", label: "Box", color: "#dbeafe" },
+];
+
+const macBookGallery = [
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/M2_Macbook_Air_Starlight_model.jpg?width=1200",
+    alt: "M2 MacBook Air Starlight model",
+    label: "Starlight",
+    credit: "KKPCW, CC BY-SA 4.0",
+    source: "https://commons.wikimedia.org/wiki/File:M2_Macbook_Air_Starlight_model.jpg",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/M2_Macbook_Air_Midnight_model_-_2.jpg?width=1400",
+    alt: "M2 MacBook Air Midnight model",
+    label: "Midnight",
+    credit: "KKPCW, CC BY-SA 4.0",
+    source: "https://commons.wikimedia.org/wiki/File:M2_Macbook_Air_Midnight_model_-_2.jpg",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/MacBook_Air_%28A2681%29_front.jpg?width=1400",
+    alt: "MacBook Air A2681 front view",
+    label: "Front",
+    credit: "Wikimedia Commons contributor, CC BY-SA",
+    source: "https://commons.wikimedia.org/wiki/File:MacBook_Air_(A2681)_front.jpg",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/MacBook_Air_%28A2681%29_rear.jpg?width=1400",
+    alt: "MacBook Air A2681 rear view",
+    label: "Rear",
+    credit: "Wikimedia Commons contributor, CC BY-SA",
+    source: "https://commons.wikimedia.org/wiki/File:MacBook_Air_(A2681)_rear.jpg",
+  },
+];
+
+const sonyHeadphoneGallery = [
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Sony-WH-1000XM3-kabellose-Bluetooth-Noise-Cancelling-Kopfhoerer.jpg?width=1200",
+    alt: "Sony wireless noise-cancelling headphones",
+    label: "Black",
+    credit: "Wikimedia Commons contributor, CC BY-SA",
+    source: "https://commons.wikimedia.org/wiki/File:Sony-WH-1000XM3-kabellose-Bluetooth-Noise-Cancelling-Kopfhoerer.jpg",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Sony-WH-1000XM3-kabellose-Bluetooth-Noise-Cancelling-Kopfhoerer.2.jpg?width=1200",
+    alt: "Sony wireless noise-cancelling headphones side view",
+    label: "Side",
+    credit: "Wikimedia Commons contributor, CC BY-SA",
+    source: "https://commons.wikimedia.org/wiki/File:Sony-WH-1000XM3-kabellose-Bluetooth-Noise-Cancelling-Kopfhoerer.2.jpg",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Sony-WH-1000XM3-kabellose-Bluetooth-Noise-Cancelling-Kopfhoerer.3.jpg?width=1200",
+    alt: "Sony wireless noise-cancelling headphones folded view",
+    label: "Folded",
+    credit: "Wikimedia Commons contributor, CC BY-SA",
+    source: "https://commons.wikimedia.org/wiki/File:Sony-WH-1000XM3-kabellose-Bluetooth-Noise-Cancelling-Kopfhoerer.3.jpg",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Bose_QuietComfort_25_Acoustic_Noise_Cancelling_Headphones.jpg?width=1200",
+    alt: "Noise-cancelling headphones reference image",
+    label: "ANC style",
+    credit: "Florian Fuchs, CC BY-SA 3.0",
+    source: "https://commons.wikimedia.org/wiki/File:Bose_QuietComfort_25_Acoustic_Noise_Cancelling_Headphones.jpg",
+  },
+];
+
+const iPadGallery = [
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/IPad_Air.png?width=1000",
+    alt: "iPad Air mockup",
+    label: "Front",
+    credit: "Zach Vega, CC BY-SA 3.0",
+    source: "https://commons.wikimedia.org/wiki/File:IPad_Air.png",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/IPad_Air.png?width=700",
+    alt: "iPad Air display view",
+    label: "Display",
+    credit: "Zach Vega, CC BY-SA 3.0",
+    source: "https://commons.wikimedia.org/wiki/File:IPad_Air.png",
+  },
+  { src: "", alt: "iPad Air accessory placeholder", label: "Pencil", color: "#dcfce7" },
+  { src: "", alt: "iPad Air packaging placeholder", label: "Box", color: "#dcfce7" },
+];
+
+const watchGallery = [
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Apple_Watch_Series_9_1_2023-11-14.jpg?width=1400",
+    alt: "Apple Watch Series 9",
+    label: "Series 9",
+    credit: "FASTILY, CC BY-SA 4.0",
+    source: "https://commons.wikimedia.org/wiki/File:Apple_Watch_Series_9_1_2023-11-14.jpg",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Apple_smartwatch.jpg?width=1400",
+    alt: "Apple smartwatch",
+    label: "Lifestyle",
+    credit: "KK IN HK, CC BY-SA 4.0",
+    source: "https://commons.wikimedia.org/wiki/File:Apple_smartwatch.jpg",
+  },
+  {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Apple_Watch-.jpg?width=1400",
+    alt: "Apple Watch on desk",
+    label: "Desk view",
+    credit: "fancycrave1, CC0",
+    source: "https://commons.wikimedia.org/wiki/File:Apple_Watch-.jpg",
+  },
+  { src: "", alt: "Apple Watch band placeholder", label: "Band", color: "#ffedd5" },
+];
+
+const buyerReviews = [
+  {
+    user: "Nikhil",
+    rating: 5,
+    date: "Verified buyer",
+    comment: "Clean design, smooth performance, and the display feels premium.",
+  },
+  {
+    user: "Rahul",
+    rating: 4,
+    date: "Verified buyer",
+    comment: "Worth the price. Delivery and packaging were both solid.",
+  },
+  {
+    user: "Aisha",
+    rating: 5,
+    date: "Verified buyer",
+    comment: "Quality is excellent and the product feels balanced in daily use.",
+  },
+];
+
+export const products = [
+  {
+    id: "iphone-14",
+    name: "iPhone 14",
+    brand: "Apple",
+    category: "Mobiles",
+    price: 79999,
+    originalPrice: 89999,
+    rating: 4.8,
+    reviewCount: 1284,
+    stock: "In stock",
+    badge: "Best seller",
+    shortDescription:
+      "A polished flagship experience with a bright display, dependable cameras, and all-day performance.",
+    description:
+      "Built for everyday speed, photography, entertainment, and secure payments. This product page is ready for real catalog data, image uploads, inventory state, and checkout integration.",
+    images: phoneGallery,
+    colors: [
+      { name: "Midnight", value: "#111827" },
+      { name: "Blue", value: "#93c5fd" },
+      { name: "Starlight", value: "#f5f5f4" },
+      { name: "Purple", value: "#c4b5fd" },
+      { name: "Red", value: "#dc2626" },
+    ],
+    storage: [
+      { label: "128 GB", price: 79999, originalPrice: 89999 },
+      { label: "256 GB", price: 89999, originalPrice: 99999 },
+      { label: "512 GB", price: 109999, originalPrice: 119999 },
+    ],
+    highlights: [
+      "6.1-inch Super Retina display",
+      "Advanced dual-camera system",
+      "Fast A15 Bionic performance",
+      "Ceramic Shield front",
+    ],
+    specs: [
+      ["Display", "6.1-inch OLED"],
+      ["Processor", "A15 Bionic"],
+      ["Camera", "12MP dual camera"],
+      ["Battery", "All-day battery life"],
+      ["Warranty", "1 year manufacturer warranty"],
+    ],
+    reviews: buyerReviews,
+  },
+  {
+    id: "galaxy-s24",
+    name: "Galaxy S24",
+    brand: "Samsung",
+    category: "Mobiles",
+    price: 64999,
+    originalPrice: 79999,
+    rating: 4.7,
+    reviewCount: 946,
+    stock: "In stock",
+    badge: "New arrival",
+    shortDescription: "Compact Android flagship with a sharp AMOLED display and AI-assisted camera tools.",
+    description:
+      "A premium Android phone mock product built for catalog, cart, filter, and detail-page testing before the backend is connected.",
+    images: galaxyGallery,
+    colors: [
+      { name: "Onyx Black", value: "#111827" },
+      { name: "Marble Gray", value: "#d1d5db" },
+      { name: "Cobalt Violet", value: "#8b5cf6" },
+    ],
+    storage: [
+      { label: "128 GB", price: 64999, originalPrice: 79999 },
+      { label: "256 GB", price: 72999, originalPrice: 84999 },
+    ],
+    highlights: ["Dynamic AMOLED display", "AI photo editing", "IP68 water resistance", "Fast 5G performance"],
+    specs: [
+      ["Display", "6.2-inch AMOLED"],
+      ["Processor", "Flagship octa-core"],
+      ["Camera", "50MP triple camera"],
+      ["Battery", "4000 mAh"],
+      ["Warranty", "1 year brand warranty"],
+    ],
+    reviews: buyerReviews,
+  },
+  {
+    id: "macbook-air-m2",
+    name: "MacBook Air M2",
+    brand: "Apple",
+    category: "Laptops",
+    price: 94999,
+    originalPrice: 114999,
+    rating: 4.9,
+    reviewCount: 732,
+    stock: "Only 8 left",
+    badge: "Creator pick",
+    shortDescription: "Thin, quiet, and fast laptop for study, travel, design work, and daily productivity.",
+    description:
+      "A laptop mock listing with selectable memory options and product details that can later map directly to backend variants.",
+    images: macBookGallery,
+    colors: [
+      { name: "Midnight", value: "#1f2937" },
+      { name: "Silver", value: "#e5e7eb" },
+      { name: "Starlight", value: "#f5f5f4" },
+    ],
+    storage: [
+      { label: "8GB / 256GB", price: 94999, originalPrice: 114999 },
+      { label: "8GB / 512GB", price: 114999, originalPrice: 134999 },
+      { label: "16GB / 512GB", price: 139999, originalPrice: 154999 },
+    ],
+    highlights: ["13.6-inch Liquid Retina display", "Silent fanless build", "MagSafe charging", "All-day battery"],
+    specs: [
+      ["Display", "13.6-inch Liquid Retina"],
+      ["Processor", "Apple M2"],
+      ["Memory", "8GB unified memory"],
+      ["Storage", "256GB SSD"],
+      ["Warranty", "1 year limited warranty"],
+    ],
+    reviews: buyerReviews,
+  },
+  {
+    id: "sony-wh-1000xm5",
+    name: "Sony WH-1000XM5",
+    brand: "Sony",
+    category: "Audio",
+    price: 29990,
+    originalPrice: 34990,
+    rating: 4.6,
+    reviewCount: 512,
+    stock: "In stock",
+    badge: "Top rated",
+    shortDescription: "Wireless noise-cancelling headphones tuned for travel, focus, and premium listening.",
+    description:
+      "A mock audio product with realistic ecommerce variants, warranty details, and customer review structure.",
+    images: sonyHeadphoneGallery,
+    colors: [
+      { name: "Black", value: "#111827" },
+      { name: "Silver", value: "#e5e7eb" },
+      { name: "Midnight Blue", value: "#1e3a8a" },
+    ],
+    storage: [
+      { label: "Standard", price: 29990, originalPrice: 34990 },
+      { label: "With case", price: 32990, originalPrice: 37990 },
+    ],
+    highlights: ["Adaptive noise cancellation", "30-hour battery", "Quick charge support", "Multipoint pairing"],
+    specs: [
+      ["Type", "Over-ear wireless"],
+      ["Battery", "Up to 30 hours"],
+      ["Charging", "USB-C quick charge"],
+      ["Connectivity", "Bluetooth multipoint"],
+      ["Warranty", "1 year brand warranty"],
+    ],
+    reviews: buyerReviews,
+  },
+  {
+    id: "ipad-air",
+    name: "iPad Air",
+    brand: "Apple",
+    category: "Tablets",
+    price: 59999,
+    originalPrice: 69999,
+    rating: 4.7,
+    reviewCount: 388,
+    stock: "In stock",
+    badge: "Student deal",
+    shortDescription: "A lightweight tablet for notes, streaming, sketching, and portable multitasking.",
+    description:
+      "A tablet mock product prepared with variant pricing, specs, and layout content for future API-driven catalog pages.",
+    images: iPadGallery,
+    colors: [
+      { name: "Space Gray", value: "#374151" },
+      { name: "Blue", value: "#bfdbfe" },
+      { name: "Purple", value: "#ddd6fe" },
+    ],
+    storage: [
+      { label: "64 GB", price: 59999, originalPrice: 69999 },
+      { label: "256 GB", price: 74999, originalPrice: 84999 },
+    ],
+    highlights: ["Liquid Retina display", "Apple Pencil support", "Fast Wi-Fi", "Touch ID"],
+    specs: [
+      ["Display", "10.9-inch Liquid Retina"],
+      ["Processor", "Apple silicon"],
+      ["Camera", "12MP wide camera"],
+      ["Battery", "Up to 10 hours"],
+      ["Warranty", "1 year limited warranty"],
+    ],
+    reviews: buyerReviews,
+  },
+  {
+    id: "apple-watch-series-9",
+    name: "Apple Watch Series 9",
+    brand: "Apple",
+    category: "Wearables",
+    price: 41999,
+    originalPrice: 46999,
+    rating: 4.5,
+    reviewCount: 268,
+    stock: "In stock",
+    badge: "Fitness pick",
+    shortDescription: "Smartwatch for health tracking, calls, notifications, workouts, and everyday convenience.",
+    description:
+      "A wearable mock product with color and band variants, made to test listing pages, filters, and product details.",
+    images: watchGallery,
+    colors: [
+      { name: "Midnight", value: "#111827" },
+      { name: "Pink", value: "#fbcfe8" },
+      { name: "Silver", value: "#e5e7eb" },
+    ],
+    storage: [
+      { label: "41 mm", price: 41999, originalPrice: 46999 },
+      { label: "45 mm", price: 44999, originalPrice: 49999 },
+    ],
+    highlights: ["Bright always-on display", "Health sensors", "Workout tracking", "Crash detection"],
+    specs: [
+      ["Case", "Aluminum"],
+      ["Display", "Always-on Retina"],
+      ["Connectivity", "GPS"],
+      ["Battery", "All-day battery"],
+      ["Warranty", "1 year limited warranty"],
+    ],
+    reviews: buyerReviews,
+  },
+];
+
+export const getProductById = (id) => products.find((product) => product.id === id);
