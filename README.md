@@ -48,7 +48,7 @@ EcomNex/
 ---
 
 ## ⚙️ Setup
-git clone https://github.com/your-username/EcomNex.git  
+git clone https://github.com/nikhilmaharana/EcomNex.git  
 cd EcomNex  
 
 cd client && npm install  
