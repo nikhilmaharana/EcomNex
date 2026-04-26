@@ -1,4 +1,4 @@
-# 🛒 EcomNex – MERN E-Commerce Platform
+# 🛒 EcomNex – E-Commerce Platform
 
 <p align="center">
   <img src="https://img.shields.io/badge/MERN-Stack-2563EB?style=for-the-badge" />
