@@ -1,0 +1,100 @@
+.auth {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f7fa, #e4e8f0);
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+}
+.auth-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.auth-sub {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-form input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.password-field {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding-right: 10px;
+}
+.password-field input {
+  border: none;
+  flex: 1;
+}
+
+.password-field span {
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.auth-options {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+.error {
+  color: red;
+  font-size: 13px;
+}
+
+.btn.full {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.auth-footer {
+  margin-top: 16px;
+  font-size: 14px;
+}
+/* PASSWORD FIELD */
+.password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-field input {
+  width: 100%;
+  padding-right: 40px; /* space for icon */
+}
+
+/* EYE ICON */
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: #555;
+}
+
+/* ERROR */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}

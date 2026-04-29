@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(to bottom, #e6f7ff, #ffffff);
+}
+
+/* PAGE CONTAINER */
+.product-page {
+  padding: 40px;
+  text-align: center;
+}
+
+/* HEADING */
+.page-title {
+  font-size: 36px;
+  color: #00bfff;
+  margin-bottom: 30px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* GRID LAYOUT */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 25px;
+}
+
+/* CARD DESIGN */
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0 10px 25px rgba(0, 191, 255, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* HOVER EFFECT */
+.card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 191, 255, 0.3);
+}
+
+/* PRODUCT IMAGE */
+.product-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+/* PRODUCT NAME */
+.card h3 {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #333;
+}
+
+/* PRICE */
+.card p {
+  font-size: 16px;
+  font-weight: bold;
+  color: #00bfff;
+}
+
+/* BUTTON */
+.card button {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #00bfff, #87cefa);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* BUTTON HOVER */
+.card button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #009acd, #5ecbff);
+}

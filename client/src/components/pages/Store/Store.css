@@ -1,3 +1,18 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
 .store-page {
   padding-bottom: 48px;
 }
@@ -275,3 +290,70 @@
     font-size: 1.85rem;
   }
 }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-icon {
+  font-size: 20px;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  display: none;
+}
+
+.profile:hover .profile-dropdown {
+  display: block;
+}
+
+.hero-images {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.hero-images img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.category-strip {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin: 30px ;
+}
+
+.category-strip button {
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background: white;
+  color: #111;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.category-strip button.active {
+  background: #111;
+  color: white;
+  border-color: #111;
+}
+

@@ -1,56 +1,57 @@
 import { useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, Navigate, useParams, useNavigate } from "react-router-dom";
 import { getProductById } from "../../../data/products";
 import ProductImageGallery from "../../productDetails/ProductImageGallery";
 import ProductInfo from "../../productDetails/ProductInfo";
 import ProductDescription from "../../productDetails/ProductDescription";
 import ReviewList from "../../productDetails/ReviewList";
+import { FaHeart, FaSearch } from "react-icons/fa";
+import { IoCartOutline } from "react-icons/io5";
 import "./ProductDetails.css";
+import Footer from "../../Footer/Footer";
+import Header from "../../Navbar/Header";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [cartCount, setCartCount] = useState(0);
   const product = getProductById(id);
+  const [searchTerm, setSearchTerm] = useState("");
+
+   const navigate = useNavigate();
 
   if (!product) {
     return <Navigate to="/" replace />;
   }
 
-  const handleCartClick = () => {
-    document.getElementById("purchase-panel")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <main className="product-page">
-      <header className="site-header">
-        <Link className="brand" to="/">
-          EcomNex
-        </Link>
-        <nav className="site-nav" aria-label="Primary navigation">
-          <Link to="/">Store</Link>
-          <a href="#benefits">Benefits</a>
-          <a href="#details">Details</a>
-          <a href="#reviews">Reviews</a>
-        </nav>
-        <button className="cart-button" type="button" onClick={handleCartClick} aria-label="Open cart">
-          Cart <span>{cartCount}</span>
-        </button>
-      </header>
 
-      <section className="product-hero" id="product" aria-labelledby="product-title">
+     <Header/>
+      {/* PRODUCT */}
+      <section className="product-hero" id="product">
         <div className="gallery-column">
-          <p className="breadcrumb">Store / Mobiles / {product.brand}</p>
-          <ProductImageGallery key={product.id} images={product.images} productName={product.name} />
+          <p className="breadcrumb">
+            Store / {product.category} / {product.brand}
+          </p>
+
+          <ProductImageGallery
+            key={product.id}
+            images={product.images}
+            productName={product.name}
+          />
         </div>
 
         <ProductInfo
           key={`${product.id}-purchase`}
           product={product}
-          onAddToCart={(quantity) => setCartCount((count) => count + quantity)}
+          onAddToCart={(quantity) =>
+            setCartCount((count) => count + quantity)
+          }
         />
       </section>
 
-      <section className="trust-strip" id="benefits" aria-label="Shopping benefits">
+      {/* BENEFITS */}
+      <section className="trust-strip" id="benefits">
         <div>
           <strong>Free delivery</strong>
           <span>On eligible orders</span>
@@ -74,7 +75,14 @@ const ProductDetails = () => {
         highlights={product.highlights}
         specs={product.specs}
       />
-      <ReviewList reviews={product.reviews} rating={product.rating} reviewCount={product.reviewCount} />
+
+      <ReviewList
+        reviews={product.reviews}
+        rating={product.rating}
+        reviewCount={product.reviewCount}
+      />
+
+      <Footer/>
     </main>
   );
 };

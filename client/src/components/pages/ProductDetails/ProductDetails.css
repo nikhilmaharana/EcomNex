@@ -671,6 +671,8 @@
   color: var(--muted-text);
 }
 
+
+
 @media (max-width: 1100px) {
   .product-hero,
   .product-details-grid,
