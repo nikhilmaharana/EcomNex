@@ -20,6 +20,13 @@ const userSchema = new mongoose.Schema(
       default: "buyer",
     },
     sellerApproved: { type: Boolean, default: false },
+    sellerStatus: {
+      type: String,
+      enum: ["pending", "approved", "rejected"],
+      default: "pending",
+    },
+    rejectionReason: { type: String, default: null },
+    rejectedAt: { type: Date, default: null },
     address: String,
     location: String,
     image: String,

@@ -46,26 +46,31 @@ app.get("/api/health", (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
+const RETRY_DB_CONNECTION_IN_MS = 10000;
 
-if (!process.env.MONGO_URI) {
-  console.error("MONGO_URI is missing in backend/.env");
-  process.exit(1);
-}
+const connectDatabase = async () => {
+  if (!process.env.MONGO_URI) {
+    console.error("MONGO_URI is missing in backend/.env");
+    return;
+  }
 
-try {
-  await mongoose.connect(process.env.MONGO_URI, {
-    serverSelectionTimeoutMS: 5000,
-  });
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      serverSelectionTimeoutMS: 5000,
+    });
 
-  console.log(`MongoDB Connected: ${mongoose.connection.name}`);
+    console.log(`MongoDB Connected: ${mongoose.connection.name}`);
+  } catch (err) {
+    console.error("MongoDB connection failed:", err.message);
+    console.error(
+      "Backend is still running. Add your current IP in MongoDB Atlas Network Access, then the app will retry."
+    );
 
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-} catch (err) {
-  console.error("MongoDB connection failed:", err.message);
-  console.error(
-    "Check that MongoDB is running and that MONGO_URI points to the database you filled in Compass."
-  );
-  process.exit(1);
-}
+    setTimeout(connectDatabase, RETRY_DB_CONNECTION_IN_MS);
+  }
+};
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  connectDatabase();
+});

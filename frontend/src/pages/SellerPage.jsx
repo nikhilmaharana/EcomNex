@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../Footer";
 import { apiUrl, getProductImage, normalizeProduct, readImageFile, getAuthHeaders } from "../lib/api";
@@ -23,14 +23,18 @@ const SellerPage = () => {
   const [saving, setSaving] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
-  const [debugHeaders, setDebugHeaders] = useState(null);
   const { user: currentUser } = useContext(UserContext);
   const authError =
     !currentUser?._id || currentUser.role !== "seller"
       ? "Please login as a seller to manage products."
       : "";
 
-  const fetchSellerData = async () => {
+  const productStatusLabel = (item) => {
+    const status = item.approvalStatus || "pending";
+    return status.charAt(0).toUpperCase() + status.slice(1);
+  };
+
+  const fetchSellerData = useCallback(async () => {
     try {
       const [productRes, orderRes] = await Promise.all([
         fetch(apiUrl(`/products?sellerId=${currentUser._id}`), {
@@ -53,12 +57,15 @@ const SellerPage = () => {
     } catch (err) {
       setError(err.message);
     }
-  };
+  }, [currentUser]);
 
   useEffect(() => {
     if (authError) return;
+    
+    // Disable linter rule to allow async fetching which triggers state updates
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchSellerData();
-  }, [authError, currentUser?._id]);
+  }, [authError, fetchSellerData]);
 
   // ✅ NEW: calculated values
   const totalRevenue = products.reduce(
@@ -203,7 +210,11 @@ const SellerPage = () => {
       await fetchSellerData();
 
       // show success message and redirect to products tab
-      setSuccessMessage(editingId ? "Product updated successfully." : "Product added successfully.");
+      setSuccessMessage(
+        editingId
+          ? "Product updated and sent for admin approval."
+          : "Product added and sent for admin approval."
+      );
       setActiveTab("products");
       // clear success message after 3s
       setTimeout(() => setSuccessMessage(""), 3000);
@@ -285,19 +296,11 @@ const SellerPage = () => {
 
     <div className="bg-[#020617] text-white min-h-screen flex mt-14">
       
-      {/* ☰ Mobile Menu */}
-      <button
-        onClick={() => setOpenSidebar(!openSidebar)}
-        className="md:hidden fixed top-4 left-4 z-50 bg-purple-500 px-3 py-1 rounded shadow-lg"
-      >
-        ☰
-      </button>
-
       {/* Sidebar */}
       <div
-        className={`fixed md:static top-0 left-0 h-full w-64 bg-[#111827] p-6 space-y-6
+        className={`fixed md:static top-0 left-0 h-full w-64 bg-[#111827] p-6 pt-20 md:pt-6 space-y-6
         transform ${openSidebar ? "translate-x-0" : "-translate-x-full"}
-        md:translate-x-0 transition-all duration-500 `}
+        md:translate-x-0 transition-all duration-500 z-40 shadow-xl md:shadow-none`}
       >
         <div>
           <h2 className="text-2xl font-bold text-purple-400">
@@ -308,7 +311,7 @@ const SellerPage = () => {
           </p>
         </div>
 
-        {["dashboard", "add", "products", "orders", "manage"].map((tab) => (
+        {["dashboard", "add", "products", "orders"].map((tab) => (
           <p
             key={tab}
             onClick={() => {
@@ -328,7 +331,15 @@ const SellerPage = () => {
       </div>
 
       {/* Main */}
-      <div className="flex-1 p-6">
+      <div className="flex-1 p-6 md:p-10 w-full overflow-x-hidden">
+        {/* ☰ Mobile Menu */}
+        <button
+          onClick={() => setOpenSidebar(!openSidebar)}
+          className="md:hidden mb-6 flex items-center gap-2 bg-purple-600 px-4 py-2 rounded-lg shadow-lg text-sm font-semibold active:scale-95 transition"
+        >
+          ☰ Menu
+        </button>
+
         {successMessage ? (
           <div className="mb-5 rounded-lg border border-green-500/30 bg-green-500/10 px-4 py-3 text-green-200">
             {successMessage}
@@ -341,21 +352,12 @@ const SellerPage = () => {
           </div>
         ) : null}
 
-        {debugHeaders ? (
-          <div className="mb-5 rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-4 py-3 text-yellow-900">
-            <p className="font-semibold">Debug headers sent:</p>
-            <pre className="whitespace-pre-wrap text-xs text-yellow-900">
-              {JSON.stringify(debugHeaders, null, 2)}
-            </pre>
-          </div>
-        ) : null}
-
         {activeTab === "dashboard" && (
           <>
             <div className="mb-6">
               <h1 className="text-3xl font-bold">Dashboard</h1>
               <p className="text-gray-400 mt-1">
-                Products you add here are visible to buyers immediately.
+                Products you add here go live after admin approval.
               </p>
             </div>
 
@@ -527,9 +529,30 @@ const SellerPage = () => {
                     <span>⭐ {item.rating || 0} ({item.reviewCount || 0})</span>
                   </div>
 
+                  <div className="mt-3">
+                    <span
+                      className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                        item.approvalStatus === "approved"
+                          ? "bg-emerald-500/10 text-emerald-300"
+                          : item.approvalStatus === "rejected"
+                            ? "bg-red-500/10 text-red-300"
+                            : "bg-amber-500/10 text-amber-300"
+                      }`}
+                    >
+                      {productStatusLabel(item)}
+                    </span>
+                  </div>
+
                   <p className="text-gray-500 text-sm mt-1 line-clamp-2">
                     {item.description}
                   </p>
+
+                  {item.approvalStatus === "rejected" && (
+                    <div className="mt-3 rounded-lg border border-red-500/20 bg-red-500/10 p-3 text-sm text-red-100">
+                      <p className="font-semibold">Admin review</p>
+                      <p className="mt-1">{item.rejectionReason || "No reason provided."}</p>
+                    </div>
+                  )}
 
                   <div className="mt-3 flex gap-2">
                     <button
@@ -622,23 +645,6 @@ const SellerPage = () => {
                   );
                 })}
               </div>
-            )}
-          </div>
-        )}
-
-        {/* MANAGE */}
-        {activeTab === "manage" && (
-          <div>
-            <h2 className="text-xl mb-4">Manage</h2>
-
-            <p>Total Products: {products.length}</p>
-
-            {products.length === 0 ? (
-              <p className="text-gray-400 mt-2">No products available</p>
-            ) : (
-              <p className="text-green-400 mt-2">
-                You have {products.length} active products
-              </p>
             )}
           </div>
         )}

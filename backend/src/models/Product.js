@@ -12,6 +12,14 @@ const productSchema = new mongoose.Schema({
     ref: "User",
   },
   sellerName: String,
+  approvalStatus: {
+    type: String,
+    enum: ["pending", "approved", "rejected"],
+    default: "pending",
+  },
+  rejectionReason: { type: String, default: null },
+  approvedAt: { type: Date, default: null },
+  rejectedAt: { type: Date, default: null },
   rating: { type: Number, default: 0 },
   reviews: [
     {

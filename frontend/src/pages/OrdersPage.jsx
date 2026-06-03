@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../Footer";
 import { UserContext } from "../context/UserContext";
-import { apiUrl, getProductImage, normalizeProduct } from "../lib/api";
+import { apiUrl, getAuthHeaders, getProductImage, normalizeProduct } from "../lib/api";
 
 const OrdersPage = () => {
   const { user } = useContext(UserContext);
@@ -11,9 +11,16 @@ const OrdersPage = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!user?._id) return;
+    if (!user?._id) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setLoading(false);
+      return;
+    }
 
-    fetch(apiUrl(`/orders?buyerId=${user._id}`))
+    setLoading(true);
+    fetch(apiUrl("/orders"), {
+      headers: getAuthHeaders(),
+    })
       .then((res) => {
         if (!res.ok) throw new Error("Failed to load your orders");
         return res.json();

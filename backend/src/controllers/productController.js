@@ -18,6 +18,8 @@ const normalizeProductBody = (body) => {
     images,
     seller: body.seller || body.sellerId || undefined,
     sellerName: body.sellerName || "",
+    approvalStatus: body.approvalStatus || "pending",
+    rejectionReason: body.rejectionReason || null,
     rating: Number(body.rating || 0),
   };
 };
@@ -31,6 +33,10 @@ export const createProduct = async (req, res) => {
       body.seller = req.user._id;
       body.sellerName = req.user.businessName || req.user.name || "";
     }
+    body.approvalStatus = "pending";
+    body.rejectionReason = null;
+    body.approvedAt = null;
+    body.rejectedAt = null;
 
     const product = new Product(body);
     const saved = await product.save();
@@ -43,10 +49,19 @@ export const createProduct = async (req, res) => {
 // ✅ GET ALL PRODUCTS
 export const getProducts = async (req, res) => {
   try {
-    const query = req.query.sellerId ? { seller: req.query.sellerId } : {};
+    let query = {};
+    if (req.query.sellerId) {
+      const sellerMatches = [req.query.sellerId];
+      if (mongoose.Types.ObjectId.isValid(req.query.sellerId)) {
+        sellerMatches.push(new mongoose.Types.ObjectId(req.query.sellerId));
+      }
+      query = { seller: { $in: sellerMatches } };
+    }
+
     const products = await Product.find(query)
-      .populate("seller")
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1, _id: -1 })
+      .lean();
+
     res.json(products);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -69,9 +84,15 @@ export const updateProduct = async (req, res) => {
       return res.status(403).json({ message: "Not authorized to update this product" });
     }
 
+    const updates = normalizeProductBody(req.body);
+    updates.approvalStatus = "pending";
+    updates.rejectionReason = null;
+    updates.approvedAt = null;
+    updates.rejectedAt = null;
+
     const updated = await Product.findByIdAndUpdate(
       id,
-      normalizeProductBody(req.body),
+      updates,
       { returnDocument: "after", runValidators: true }
     );
 
@@ -94,7 +115,7 @@ export const getProduct = async (req, res) => {
       return res.status(400).json({ message: "Invalid ID" });
     }
 
-    const product = await Product.findById(id).populate("seller");
+    const product = await Product.findById(id).lean();
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }

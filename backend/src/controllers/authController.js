@@ -52,6 +52,7 @@ export const signup = async (req, res) => {
     // New sellers must be approved by admin
     if (role === "seller") {
       user.sellerApproved = false;
+      user.sellerStatus = "pending";
       await user.save();
     }
 
@@ -78,6 +79,15 @@ export const login = async (req, res) => {
 
     if (!verifyPassword(password, user.password)) {
       return res.status(401).json({ message: "Incorrect password" });
+    }
+
+    // Prevent rejected sellers from logging in
+    if (user.role === "seller" && user.sellerStatus === "rejected") {
+      return res.status(403).json({
+        message:
+          "Your seller account was rejected. Reason: " +
+          (user.rejectionReason || "Not specified"),
+      });
     }
 
     // Prevent seller access until approved
