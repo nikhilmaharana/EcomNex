@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "admin:create": "node src/scripts/createAdmin.js",
     "seed": "node src/scripts/seed.js",
-    "start": "nodemon src/index.js"
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",
